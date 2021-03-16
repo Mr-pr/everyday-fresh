@@ -11,6 +11,8 @@ const roleToRoute = {
     },
     {
       name: 'ProductAdd',
+    }, {
+      name: 'ProductEdit',
     },
   ],
   admin: [
@@ -26,15 +28,18 @@ const roleToRoute = {
     {
       name: 'Category',
     },
+    {
+      name: 'ProductEdit',
+    },
   ],
 };
 
 /**
-   * 过滤掉没有权限的路由
-   * @param {String} role
-   * @param {Array} routes
-   *
-   */
+ * 过滤掉没有权限的路由
+ * @param {String} role
+ * @param {Array} routes
+ *
+ */
 export default function getMenuRoute(role, routes) {
   console.log(role, routes);
   const allowRoutesName = roleToRoute[role].map((item) => item.name);

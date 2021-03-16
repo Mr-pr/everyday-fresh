@@ -12,7 +12,6 @@ const ayncRouterMap = [{
   meta: {
     title: '商品',
     icon: 'inbox',
-
     hidden: false,
   },
   component: Home,
@@ -22,9 +21,7 @@ const ayncRouterMap = [{
     meta: {
       title: '商品列表',
       icon: 'unordered-list',
-
       hidden: false,
-
     },
     component: () => import('@/views/page/productList.vue'),
   }, {
@@ -33,9 +30,16 @@ const ayncRouterMap = [{
     meta: {
       title: '添加商品',
       icon: 'file-add',
-
       hidden: false,
-
+    },
+    component: () => import('@/views/page/productAdd.vue'),
+  }, {
+    path: 'edit/:id',
+    name: 'ProductEdit',
+    meta: {
+      title: '编辑商品',
+      icon: 'file-add',
+      hidden: true,
     },
     component: () => import('@/views/page/productAdd.vue'),
   }, {
@@ -44,9 +48,7 @@ const ayncRouterMap = [{
     meta: {
       title: '类目管理',
       icon: 'project',
-
       hidden: false,
-
     },
     component: () => import('@/views/page/category.vue'),
   }],
@@ -57,11 +59,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/index',
     meta: {
       title: '首页',
       hidden: false,
       icon: 'home',
-
     },
     children: [{
       path: 'index',
@@ -69,9 +71,7 @@ const routes = [
       meta: {
         title: '统计',
         icon: 'number',
-
         hidden: false,
-
       },
       component: () => import('../views/page/index.vue'),
     }],
@@ -97,8 +97,8 @@ router.beforeEach((to, from, next) => {
       if (!isAddRoutes) {
         const menuRoutes = getMenuRoutes(store.state.user.role, ayncRouterMap);
         store.dispatch('changeMenuRoutes', routes.concat(menuRoutes)).then(() => {
-          next();
           router.addRoutes(menuRoutes);
+          next();
         });
         isAddRoutes = true;
       }

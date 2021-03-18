@@ -53,4 +53,7 @@ export default {
     right: 0;
     top: 0;
   }
+  .login-out{
+    z-index: 4;
+  }
 </style>
